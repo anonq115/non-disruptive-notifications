@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notification Circle</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: hsl(215.34deg, 12%, 3%);
+        }
+
+        .notification-circle {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: transparent;
+            border: 5px solid purple; /* Starts as purple */
+            box-shadow: 0 0 15px purple;
+            animation: colorTransition 7s linear;
+            z-index: 1; /* Ensure notification-circle is below green-circle */
+        }
+
+        .green-circle {
+           position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: transparent;
+            border: 5px solid green; /* Starts as purple */
+            animation: rotateGreen 3s linear infinite, fadeOut 4s ease 3s forwards; /* Rotate only during transition and fade out after */
+            z-index: 2; /* Ensure green-circle is on top of notification-circle */
+        }
+
+        @keyframes colorTransition {
+            0%, 100% {
+                border-color: purple;
+                box-shadow: 0 0 15px purple;
+            }
+            30% {
+                /* Transition to green */
+              
+                box-shadow: 0 0 15px green;
+                opacity: 1; /* Make green visible during transition */
+            }
+            100% {
+               
+                box-shadow: 0 0 15px green;
+                opacity: 1; /* Ensure green remains visible */
+            }
+        }
+
+        @keyframes rotateGreen {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0; /* Fade out the green-circle after 4 seconds delay */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification-circle"></div>
+    <div class="green-circle"></div>
+</body>
+</html>
